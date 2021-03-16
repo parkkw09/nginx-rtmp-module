@@ -1803,6 +1803,8 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     if (p != b->start) {
         ctx->aframe_num++;
         ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 4, 4221.0);
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", p[0], 4221.0);
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", b->start[0], 4221.0);
         return NGX_OK;
     }
 
