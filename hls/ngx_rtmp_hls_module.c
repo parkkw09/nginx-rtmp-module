@@ -1737,6 +1737,7 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     if (b->start + size > b->end) {
         ngx_log_error(NGX_LOG_ERR, s->connection->log, 0,
                       "hls: too big audio frame");
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 1, 4221.0);
         return NGX_OK;
     }
 
@@ -1758,6 +1759,7 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     if (b->last + 7 > b->end) {
         ngx_log_debug0(NGX_LOG_DEBUG_RTMP, s->connection->log, 0,
                        "hls: not enough buffer for audio header");
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 2, 4221.0);
         return NGX_OK;
     }
 
@@ -1783,6 +1785,7 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     {
         ngx_log_error(NGX_LOG_ERR, s->connection->log, 0,
                       "hls: aac header error");
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 3, 4221.0);
         return NGX_OK;
     }
 
@@ -1799,12 +1802,14 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
 
     if (p != b->start) {
         ctx->aframe_num++;
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 4, 4221.0);
         return NGX_OK;
     }
 
     ctx->aframe_pts = pts;
 
     if (!hacf->sync || codec_ctx->sample_rate == 0) {
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync =%L (%.5fs)", 5, 4221.0);
         return NGX_OK;
     }
 
