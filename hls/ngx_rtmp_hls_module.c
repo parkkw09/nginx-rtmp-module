@@ -1732,6 +1732,7 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
 
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync timestamp=%L (%.5fs)", h->timestamp, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync pts=%L (%.5fs)", pts, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync mlen=%L (%.5fs)", h->mlen, 4221.0);
 
     if (b->start + size > b->end) {
         ngx_log_error(NGX_LOG_ERR, s->connection->log, 0,
