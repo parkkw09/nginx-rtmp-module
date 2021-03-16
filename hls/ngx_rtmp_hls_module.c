@@ -1813,12 +1813,12 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
                                  codec_ctx->sample_rate;
     dpts = (int64_t) (est_pts - pts);
 
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_base=%L", ctx->aframe_base);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_num=%L", ctx->aframe_num);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync sample_rate=%L", codec_ctx->sample_rate);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_pts=%L", ctx->aframe_pts);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync pts=%L", pts);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync est_pts=%L", est_pts);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_base=%L (%.5fs)", ctx->aframe_base, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_num=%L (%.5fs)", ctx->aframe_num, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync sample_rate=%L (%.5fs)", codec_ctx->sample_rate, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_pts=%L (%.5fs)", ctx->aframe_pts, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync pts=%L (%.5fs)", pts);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync est_pts=%L (%.5fs)", est_pts);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync dpts=%L (%.5fs)", dpts, dpts / 90000.);
 
     if (dpts <= (int64_t) hacf->sync * 90 &&
