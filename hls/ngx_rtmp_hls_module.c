@@ -1730,6 +1730,9 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     size = h->mlen - 2 + 7;
     pts = (uint64_t) h->timestamp * 90;
 
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync timestamp=%L (%.5fs)", h->timestamp, 4221.0);
+    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync pts=%L (%.5fs)", pts, 4221.0);
+
     if (b->start + size > b->end) {
         ngx_log_error(NGX_LOG_ERR, s->connection->log, 0,
                       "hls: too big audio frame");
@@ -1817,7 +1820,6 @@ ngx_rtmp_hls_audio(ngx_rtmp_session_t *s, ngx_rtmp_header_t *h,
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_num=%L (%.5fs)", ctx->aframe_num, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync sample_rate=%L (%.5fs)", codec_ctx->sample_rate, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync aframe_pts=%L (%.5fs)", ctx->aframe_pts, 4221.0);
-    ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync pts=%L (%.5fs)", pts, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync est_pts=%L (%.5fs)", est_pts, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync sync=%L (%.5fs)", hacf->sync, 4221.0);
     ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "hls: audio sync dpts=%L (%.5fs)", dpts, dpts / 90000.);
